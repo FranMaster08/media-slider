@@ -5,7 +5,8 @@ Slider vertical estilo TikTok para **Angular 19+** y como **Web Component** stan
 - Soporta **imágenes y vídeos** (campo `type: 'image' | 'video'`).
 - Scroll snap vertical, un slide por viewport.
 - Auto-play / pause de vídeos al entrar/salir del viewport (`IntersectionObserver`).
-- Vídeos con `loop`, `muted` y `playsinline` por defecto (requisito para autoplay sin gesto del usuario en navegadores modernos).
+- Vídeos con `loop`, `playsinline`, `poster` opcional y barra de progreso fina en la base.
+- **Botón global de mute / unmute** (esquina superior derecha) — solo aparece si hay al menos un vídeo en el feed. Estado compartido entre todos los slides.
 - Doble-tap o tecla `L` para dar like, con animación de burst.
 - Soporte de teclado: flechas / `PageUp` / `PageDown` para navegar, `Espacio` para play/pause.
 - Standalone component sin dependencias externas.
@@ -67,11 +68,13 @@ export class FeedComponent {
 class TikTokSliderComponent {
   slides = input.required<readonly SlideData[]>();
   doubleTap = output<void>();
+  mutedChange = output<boolean>(); // emite al cambiar mute global
 }
 
 interface SlideData {
-  type: 'image' | 'video'; // requerido
-  media: string;           // URL absoluta a imagen o vídeo
+  type: 'image' | 'video';   // requerido
+  media: string;             // URL absoluta a imagen o vídeo
+  poster?: string;           // (vídeos) frame previo mientras carga
   user: string;
   avatar: string;
   caption: string;
@@ -131,12 +134,13 @@ Carga el bundle generado por `npm run build:element` (un único `.js` con todas 
 
 ## Atajos de teclado
 
-| Tecla              | Acción                |
-| ------------------ | --------------------- |
-| `↓` / `PageDown`   | Slide siguiente       |
-| `↑` / `PageUp`     | Slide anterior        |
-| `Espacio`          | Play / pause del vídeo |
-| `L`                | Like                  |
+| Tecla              | Acción                  |
+| ------------------ | ----------------------- |
+| `↓` / `PageDown`   | Slide siguiente         |
+| `↑` / `PageUp`     | Slide anterior          |
+| `Espacio`          | Play / pause del vídeo  |
+| `L`                | Like                    |
+| `M`                | Mute / unmute global    |
 
 ## Licencia
 

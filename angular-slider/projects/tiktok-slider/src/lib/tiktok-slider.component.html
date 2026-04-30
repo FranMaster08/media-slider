@@ -1,6 +1,25 @@
 <div #viewport class="ttk-slider__viewport">
     @for (slide of slides(); track slide.media) {
-        <ttk-slide [data]="slide" (doubleTap)="onSlideDoubleTap()" />
+        <ttk-slide [data]="slide" [muted]="muted()" (doubleTap)="onSlideDoubleTap()" />
     }
 </div>
+@if (hasVideos()) {
+    <button
+        type="button"
+        class="ttk-slider__mute"
+        [class.is-muted]="muted()"
+        [attr.aria-label]="muted() ? 'Activar sonido' : 'Silenciar'"
+        (click)="toggleMute($event)"
+    >
+        @if (muted()) {
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.59 3l2.7 2.7-1.41 1.41-2.7-2.7-2.7 2.7-1.41-1.41 2.7-2.7-2.7-2.7 1.41-1.41 2.7 2.7 2.7-2.7 1.41 1.41-2.7 2.7z"/>
+            </svg>
+        } @else {
+            <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4.03v8.05A4.5 4.5 0 0 0 16.5 12zM14 3.23v2.06a7 7 0 0 1 0 13.42v2.06a9 9 0 0 0 0-17.54z"/>
+            </svg>
+        }
+    </button>
+}
 <ttk-like-burst />

@@ -2,8 +2,10 @@
     <video
         class="slide__media"
         [src]="data().media"
+        [attr.poster]="data().poster ?? null"
+        [muted]="muted()"
+        (timeupdate)="onProgress($event)"
         loop
-        muted
         playsinline
         preload="metadata"
         disablepictureinpicture
@@ -32,3 +34,8 @@
         <ttk-action-button action="share" (share)="share()" />
     </aside>
 </div>
+@if (data().type === 'video') {
+    <div class="slide__progress" aria-hidden="true">
+        <div class="slide__progress-bar" [style.width.%]="progress() * 100"></div>
+    </div>
+}

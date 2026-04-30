@@ -92,6 +92,25 @@
     object-fit: cover;
 }
 
+.slide__progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.18);
+    pointer-events: none;
+    z-index: 5;
+}
+
+.slide__progress-bar {
+    height: 100%;
+    width: 0%;
+    background: rgba(255, 255, 255, 0.95);
+    transform-origin: left;
+    transition: width 0.12s linear;
+}
+
 @keyframes spin {
     to { transform: rotate(360deg); }
 }

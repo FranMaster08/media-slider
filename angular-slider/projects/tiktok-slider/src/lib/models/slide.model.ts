@@ -5,6 +5,7 @@ export type SlideMediaType = 'image' | 'video';
 export interface SlideData {
   readonly type: SlideMediaType;
   readonly media: string;
+  readonly poster?: string;
   readonly user: string;
   readonly avatar: string;
   readonly caption: string;

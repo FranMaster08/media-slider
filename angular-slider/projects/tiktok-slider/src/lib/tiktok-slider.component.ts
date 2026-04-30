@@ -8,9 +8,11 @@ import {
   QueryList,
   ViewChild,
   ViewChildren,
+  computed,
   inject,
   input,
   output,
+  signal,
 } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SlideComponent } from './components/slide.component';
@@ -31,6 +33,12 @@ export class TikTokSliderComponent implements AfterViewInit {
   readonly slides = input.required<readonly SlideData[]>();
 
   readonly doubleTap = output<void>();
+  readonly mutedChange = output<boolean>();
+
+  protected readonly muted = signal(true);
+  protected readonly hasVideos = computed(() =>
+    this.slides().some((s) => s.type === 'video'),
+  );
 
   @ViewChild('viewport', { static: true })
   private viewportRef!: ElementRef<HTMLElement>;
@@ -93,6 +101,13 @@ export class TikTokSliderComponent implements AfterViewInit {
     this.doubleTap.emit();
   }
 
+  toggleMute(event: MouseEvent): void {
+    event.stopPropagation();
+    const next = !this.muted();
+    this.muted.set(next);
+    this.mutedChange.emit(next);
+  }
+
   @HostListener('document:keydown', ['$event'])
   handleKeydown(event: KeyboardEvent): void {
     const current = this.currentSlide;
@@ -116,6 +131,11 @@ export class TikTokSliderComponent implements AfterViewInit {
       case 'l':
       case 'L':
         current.like();
+        break;
+      case 'm':
+      case 'M':
+        this.muted.update((v) => !v);
+        this.mutedChange.emit(this.muted());
         break;
     }
   }

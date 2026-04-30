@@ -13,9 +13,10 @@ export const SLIDES: readonly SlideData[] = [
   {
     type: 'video',
     media: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4',
+    poster: 'https://peach.blender.org/wp-content/uploads/title_anouncement.jpg',
     user: '@big_buck_bunny',
     avatar: 'https://i.pravatar.cc/100?img=68',
-    caption: 'Vídeo de prueba con autoplay y loop 🎬 #demo',
+    caption: 'Vídeo con autoplay, loop, mute toggle y barra de progreso 🎬 #demo',
     music: 'Open Source Theme - bunny',
     counts: { like: '12.8K', comment: '1.5K', bookmark: '730' },
   },

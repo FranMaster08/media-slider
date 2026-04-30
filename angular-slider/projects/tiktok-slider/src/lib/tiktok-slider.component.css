@@ -25,6 +25,39 @@
     display: none;
 }
 
+.ttk-slider__mute {
+    position: absolute;
+    top: calc(14px + env(safe-area-inset-top));
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.45);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 15;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: background 0.15s ease, transform 0.15s ease;
+    padding: 0;
+}
+
+.ttk-slider__mute:hover {
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.ttk-slider__mute:active {
+    transform: scale(0.92);
+}
+
+.ttk-slider__mute.is-muted {
+    color: rgba(255, 255, 255, 0.85);
+}
+
 @media (min-width: 700px) {
     :host {
         max-width: 420px;

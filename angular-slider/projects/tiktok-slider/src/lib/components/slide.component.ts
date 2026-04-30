@@ -28,10 +28,12 @@ export class SlideComponent {
   static readonly TAP_DELAY_MS = 280;
 
   readonly data = input.required<SlideData>();
+  readonly muted = input<boolean>(true);
 
   readonly doubleTap = output<void>();
 
   protected readonly visible = signal(false);
+  protected readonly progress = signal(0);
 
   @HostBinding('class.is-visible') get visibleClass(): boolean {
     return this.visible();
@@ -72,7 +74,15 @@ export class SlideComponent {
     const video = this.videoElement;
     if (!video) return;
     video.currentTime = 0;
+    this.progress.set(0);
     video.play().catch(() => {});
+  }
+
+  onProgress(event: Event): void {
+    const video = event.target as HTMLVideoElement;
+    if (video.duration > 0 && Number.isFinite(video.duration)) {
+      this.progress.set(video.currentTime / video.duration);
+    }
   }
 
   pause(): void {
