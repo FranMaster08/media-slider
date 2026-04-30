@@ -1,0 +1,45 @@
+.action {
+    background: transparent;
+    border: 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    font: inherit;
+    padding: 0;
+}
+
+.action__icon {
+    font-size: 2rem;
+    line-height: 1;
+    filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.5));
+    transition: transform 0.15s ease, color 0.15s ease;
+}
+
+.action small {
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+}
+
+.action:active .action__icon {
+    transform: scale(0.85);
+}
+
+.action.is-active[data-action="like"] .action__icon {
+    color: #fe2c55;
+    animation: pop 0.3s ease;
+}
+
+.action.is-active[data-action="bookmark"] .action__icon {
+    color: #facc15;
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.35); }
+    100% { transform: scale(1); }
+}

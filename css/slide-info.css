@@ -1,0 +1,48 @@
+.slide__info {
+    max-width: 75%;
+    pointer-events: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.slide__info h3 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.slide__info p {
+    font-size: 0.9rem;
+    line-height: 1.35;
+    opacity: 0.95;
+}
+
+.slide__music {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    margin-top: 4px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.slide__music-icon {
+    display: inline-block;
+    animation: spin 4s linear infinite;
+}
+
+.slide__music-text {
+    display: inline-block;
+    animation: marquee 12s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+@keyframes marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}

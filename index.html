@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Slider TikTok</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="slider"></div>
+
+    <nav class="topbar">
+        <span class="topbar__item">Siguiendo</span>
+        <span class="topbar__item topbar__item--active">Para ti</span>
+    </nav>
+
+    <div class="like-burst" aria-hidden="true">♥</div>
+
+    <template id="slide-template">
+        <article class="slide">
+            <img class="slide__media" src="" alt="">
+            <div class="slide__overlay">
+                <div class="slide__info">
+                    <h3></h3>
+                    <p></p>
+                    <div class="slide__music">
+                        <span class="slide__music-icon">♪</span>
+                        <span class="slide__music-text"></span>
+                    </div>
+                </div>
+                <aside class="slide__actions">
+                    <div class="slide__avatar">
+                        <img src="" alt="">
+                        <button class="slide__follow" aria-label="Seguir">+</button>
+                    </div>
+                    <button class="action" data-action="like">
+                        <span class="action__icon">♥</span>
+                        <small></small>
+                    </button>
+                    <button class="action" data-action="comment">
+                        <span class="action__icon">💬</span>
+                        <small></small>
+                    </button>
+                    <button class="action" data-action="bookmark">
+                        <span class="action__icon">🔖</span>
+                        <small></small>
+                    </button>
+                    <button class="action" data-action="share">
+                        <span class="action__icon">↪</span>
+                        <small>Share</small>
+                    </button>
+                </aside>
+            </div>
+        </article>
+    </template>
+
+    <script type="module" src="index.js"></script>
+</body>
+</html>

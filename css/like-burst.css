@@ -1,0 +1,22 @@
+.like-burst {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 6rem;
+    color: #fe2c55;
+    pointer-events: none;
+    z-index: 20;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+}
+
+.like-burst.is-active {
+    animation: heart-burst 0.8s ease-out;
+}
+
+@keyframes heart-burst {
+    0%   { transform: translate(-50%, -50%) scale(0) rotate(-15deg); opacity: 0; }
+    30%  { transform: translate(-50%, -50%) scale(1.2) rotate(0deg);  opacity: 1; }
+    100% { transform: translate(-50%, -60%) scale(1)   rotate(10deg); opacity: 0; }
+}
