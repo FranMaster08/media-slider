@@ -1,4 +1,17 @@
-<img class="slide__media" [src]="data().media" alt="" />
+@if (data().type === 'video') {
+    <video
+        class="slide__media"
+        [src]="data().media"
+        loop
+        muted
+        playsinline
+        preload="metadata"
+        disablepictureinpicture
+        disableremoteplayback
+    ></video>
+} @else {
+    <img class="slide__media" [src]="data().media" alt="" />
+}
 <div class="slide__overlay">
     <div class="slide__info">
         <h3>{{ data().user }}</h3>

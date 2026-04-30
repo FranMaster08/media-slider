@@ -2,6 +2,7 @@ import { SlideData } from 'tiktok-slider';
 
 export const SLIDES: readonly SlideData[] = [
   {
+    type: 'image',
     media: 'https://picsum.photos/id/1011/720/1280',
     user: '@mountain_lover',
     avatar: 'https://i.pravatar.cc/100?img=12',
@@ -10,6 +11,16 @@ export const SLIDES: readonly SlideData[] = [
     counts: { like: '1.2K', comment: '340', bookmark: '89' },
   },
   {
+    type: 'video',
+    media: 'https://test-videos.co.uk/vids/bigbuckbunny/mp4/h264/360/Big_Buck_Bunny_360_10s_1MB.mp4',
+    user: '@big_buck_bunny',
+    avatar: 'https://i.pravatar.cc/100?img=68',
+    caption: 'Vídeo de prueba con autoplay y loop 🎬 #demo',
+    music: 'Open Source Theme - bunny',
+    counts: { like: '12.8K', comment: '1.5K', bookmark: '730' },
+  },
+  {
+    type: 'image',
     media: 'https://picsum.photos/id/1015/720/1280',
     user: '@river_vibes',
     avatar: 'https://i.pravatar.cc/100?img=32',
@@ -18,6 +29,7 @@ export const SLIDES: readonly SlideData[] = [
     counts: { like: '8.5K', comment: '910', bookmark: '421' },
   },
   {
+    type: 'image',
     media: 'https://picsum.photos/id/1016/720/1280',
     user: '@wildlife',
     avatar: 'https://i.pravatar.cc/100?img=47',
@@ -26,6 +38,7 @@ export const SLIDES: readonly SlideData[] = [
     counts: { like: '20K', comment: '1.1K', bookmark: '2.3K' },
   },
   {
+    type: 'image',
     media: 'https://picsum.photos/id/1018/720/1280',
     user: '@city_nights',
     avatar: 'https://i.pravatar.cc/100?img=5',

@@ -2,8 +2,10 @@
 
 Slider vertical estilo TikTok para **Angular 19+** y como **Web Component** standalone.
 
+- Soporta **imágenes y vídeos** (campo `type: 'image' | 'video'`).
 - Scroll snap vertical, un slide por viewport.
 - Auto-play / pause de vídeos al entrar/salir del viewport (`IntersectionObserver`).
+- Vídeos con `loop`, `muted` y `playsinline` por defecto (requisito para autoplay sin gesto del usuario en navegadores modernos).
 - Doble-tap o tecla `L` para dar like, con animación de burst.
 - Soporte de teclado: flechas / `PageUp` / `PageDown` para navegar, `Espacio` para play/pause.
 - Standalone component sin dependencias externas.
@@ -33,12 +35,22 @@ import { TikTokSliderComponent, SlideData } from 'tiktok-slider';
 export class FeedComponent {
   readonly slides = signal<SlideData[]>([
     {
+      type: 'image',
       media: 'https://picsum.photos/720/1280',
       user: '@demo',
       avatar: 'https://i.pravatar.cc/100',
       caption: 'Hola mundo',
       music: 'sonido original',
       counts: { like: '1.2K', comment: '340', bookmark: '89' },
+    },
+    {
+      type: 'video',
+      media: 'https://example.com/clip.mp4',
+      user: '@demo',
+      avatar: 'https://i.pravatar.cc/100',
+      caption: 'Vídeo con autoplay + loop',
+      music: 'mute por defecto',
+      counts: { like: '8K' },
     },
   ]);
 
@@ -58,7 +70,8 @@ class TikTokSliderComponent {
 }
 
 interface SlideData {
-  media: string;
+  type: 'image' | 'video'; // requerido
+  media: string;           // URL absoluta a imagen o vídeo
   user: string;
   avatar: string;
   caption: string;
@@ -67,6 +80,7 @@ interface SlideData {
 }
 
 type SlideAction = 'like' | 'comment' | 'bookmark' | 'share';
+type SlideMediaType = 'image' | 'video';
 ```
 
 ---
@@ -85,12 +99,22 @@ Carga el bundle generado por `npm run build:element` (un único `.js` con todas 
     <script>
       document.getElementById('feed').slides = [
         {
+          type: 'image',
           media: 'https://picsum.photos/720/1280',
           user: '@demo',
           avatar: 'https://i.pravatar.cc/100',
           caption: 'Hola mundo',
           music: 'sonido original',
           counts: { like: '1.2K' },
+        },
+        {
+          type: 'video',
+          media: 'https://example.com/clip.mp4',
+          user: '@demo',
+          avatar: 'https://i.pravatar.cc/100',
+          caption: 'Vídeo con autoplay',
+          music: 'sonido original',
+          counts: { like: '8K' },
         },
       ];
       document.getElementById('feed').addEventListener('doubleTap', () => {

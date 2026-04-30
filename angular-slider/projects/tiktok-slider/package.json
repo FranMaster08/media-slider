@@ -1,7 +1,7 @@
 {
   "name": "tiktok-slider",
-  "version": "1.0.0",
-  "description": "Slider vertical estilo TikTok para Angular 19+. Standalone component con scroll snap, doble-tap para like, animación de burst y soporte de teclado.",
+  "version": "1.1.0",
+  "description": "Slider vertical estilo TikTok para Angular 19+. Soporta imágenes y vídeos (autoplay + loop), scroll snap, doble-tap para like, animación de burst y soporte de teclado.",
   "keywords": [
     "angular",
     "slider",

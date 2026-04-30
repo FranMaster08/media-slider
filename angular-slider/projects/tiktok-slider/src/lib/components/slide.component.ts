@@ -49,12 +49,13 @@ export class SlideComponent {
     return this.hostRef.nativeElement;
   }
 
-  private get media(): HTMLMediaElement | HTMLImageElement | null {
-    return this.element.querySelector('.slide__media');
+  private get isVideo(): boolean {
+    return this.data().type === 'video';
   }
 
-  private get isVideo(): boolean {
-    return this.media?.tagName === 'VIDEO';
+  private get videoElement(): HTMLVideoElement | null {
+    if (!this.isVideo) return null;
+    return this.element.querySelector<HTMLVideoElement>('video.slide__media');
   }
 
   private get likeButton(): ActionButtonComponent | undefined {
@@ -68,20 +69,19 @@ export class SlideComponent {
   }
 
   play(): void {
-    if (!this.isVideo) return;
-    const video = this.media as HTMLVideoElement;
+    const video = this.videoElement;
+    if (!video) return;
     video.currentTime = 0;
     video.play().catch(() => {});
   }
 
   pause(): void {
-    if (!this.isVideo) return;
-    (this.media as HTMLVideoElement).pause();
+    this.videoElement?.pause();
   }
 
   togglePlayback(): void {
-    if (!this.isVideo) return;
-    const video = this.media as HTMLVideoElement;
+    const video = this.videoElement;
+    if (!video) return;
     if (video.paused) video.play().catch(() => {});
     else video.pause();
   }
