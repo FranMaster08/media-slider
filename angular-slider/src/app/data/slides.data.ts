@@ -1,0 +1,36 @@
+import { SlideData } from 'tiktok-slider';
+
+export const SLIDES: readonly SlideData[] = [
+  {
+    media: 'https://picsum.photos/id/1011/720/1280',
+    user: '@mountain_lover',
+    avatar: 'https://i.pravatar.cc/100?img=12',
+    caption: 'Aventura en la montaña 🏔️ #fyp #nature #travel',
+    music: 'sonido original - mountain_lover',
+    counts: { like: '1.2K', comment: '340', bookmark: '89' },
+  },
+  {
+    media: 'https://picsum.photos/id/1015/720/1280',
+    user: '@river_vibes',
+    avatar: 'https://i.pravatar.cc/100?img=32',
+    caption: 'Sonido del río al amanecer 🌅 #relax #asmr',
+    music: 'Lo-Fi Morning - chillbeats',
+    counts: { like: '8.5K', comment: '910', bookmark: '421' },
+  },
+  {
+    media: 'https://picsum.photos/id/1016/720/1280',
+    user: '@wildlife',
+    avatar: 'https://i.pravatar.cc/100?img=47',
+    caption: 'Encuentro inesperado en el safari 🦁🔥 #wildlife #viral',
+    music: 'Epic Drums - cinematic',
+    counts: { like: '20K', comment: '1.1K', bookmark: '2.3K' },
+  },
+  {
+    media: 'https://picsum.photos/id/1018/720/1280',
+    user: '@city_nights',
+    avatar: 'https://i.pravatar.cc/100?img=5',
+    caption: 'La ciudad nunca duerme 🌃 #citylife #night',
+    music: 'Neon Dreams - synthwave',
+    counts: { like: '45K', comment: '3.2K', bookmark: '5.1K' },
+  },
+];

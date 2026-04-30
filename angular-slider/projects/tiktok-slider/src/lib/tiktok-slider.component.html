@@ -1,0 +1,6 @@
+<div #viewport class="ttk-slider__viewport">
+    @for (slide of slides(); track slide.media) {
+        <ttk-slide [data]="slide" (doubleTap)="onSlideDoubleTap()" />
+    }
+</div>
+<ttk-like-burst />

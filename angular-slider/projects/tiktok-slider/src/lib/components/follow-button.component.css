@@ -1,0 +1,26 @@
+.slide__follow {
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 0;
+    background: #fe2c55;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.slide__follow.is-following {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.6);
+    pointer-events: none;
+}

@@ -1,0 +1,21 @@
+<img class="slide__media" [src]="data().media" alt="" />
+<div class="slide__overlay">
+    <div class="slide__info">
+        <h3>{{ data().user }}</h3>
+        <p>{{ data().caption }}</p>
+        <div class="slide__music">
+            <span class="slide__music-icon">♪</span>
+            <span class="slide__music-text">{{ data().music }}</span>
+        </div>
+    </div>
+    <aside class="slide__actions">
+        <div class="slide__avatar">
+            <img [src]="data().avatar" alt="" />
+            <ttk-follow-button />
+        </div>
+        <ttk-action-button action="like" [initialCount]="data().counts.like ?? ''" />
+        <ttk-action-button action="comment" [initialCount]="data().counts.comment ?? ''" />
+        <ttk-action-button action="bookmark" [initialCount]="data().counts.bookmark ?? ''" />
+        <ttk-action-button action="share" (share)="share()" />
+    </aside>
+</div>

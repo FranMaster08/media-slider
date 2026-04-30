@@ -1,0 +1,9 @@
+<button
+    class="action"
+    [class.is-active]="active()"
+    [attr.data-action]="action()"
+    (click)="onClick($event)"
+>
+    <span class="action__icon">{{ icon() }}</span>
+    <small>{{ label() }}</small>
+</button>
