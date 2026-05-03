@@ -61,11 +61,11 @@
         }
       }
     },
-    "tiktok-slider": {
+    "media-slider": {
       "projectType": "library",
-      "root": "projects/tiktok-slider",
-      "sourceRoot": "projects/tiktok-slider/src",
-      "prefix": "ttk",
+      "root": "projects/media-slider",
+      "sourceRoot": "projects/media-slider/src",
+      "prefix": "media",
       "schematics": {
         "@schematics/angular:component": {
           "style": "css",
@@ -77,39 +77,39 @@
         "build": {
           "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
-            "project": "projects/tiktok-slider/ng-package.json"
+            "project": "projects/media-slider/ng-package.json"
           },
           "configurations": {
             "production": {
-              "tsConfig": "projects/tiktok-slider/tsconfig.lib.prod.json"
+              "tsConfig": "projects/media-slider/tsconfig.lib.prod.json"
             },
             "development": {
-              "tsConfig": "projects/tiktok-slider/tsconfig.lib.json"
+              "tsConfig": "projects/media-slider/tsconfig.lib.json"
             }
           },
           "defaultConfiguration": "production"
         }
       }
     },
-    "tiktok-slider-element": {
+    "media-slider-element": {
       "projectType": "application",
-      "root": "projects/tiktok-slider-element",
-      "sourceRoot": "projects/tiktok-slider-element/src",
-      "prefix": "ttk",
+      "root": "projects/media-slider-element",
+      "sourceRoot": "projects/media-slider-element/src",
+      "prefix": "media",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/tiktok-slider-element",
+            "outputPath": "dist/media-slider-element",
             "index": false,
-            "browser": "projects/tiktok-slider-element/src/main.ts",
+            "browser": "projects/media-slider-element/src/main.ts",
             "polyfills": ["zone.js"],
-            "tsConfig": "projects/tiktok-slider-element/tsconfig.app.json",
+            "tsConfig": "projects/media-slider-element/tsconfig.app.json",
             "outputHashing": "none",
             "assets": [
               {
                 "glob": "index.html",
-                "input": "projects/tiktok-slider-element/src",
+                "input": "projects/media-slider-element/src",
                 "output": "/"
               }
             ],
@@ -137,10 +137,10 @@
           },
           "configurations": {
             "production": {
-              "buildTarget": "tiktok-slider-element:build:production"
+              "buildTarget": "media-slider-element:build:production"
             },
             "development": {
-              "buildTarget": "tiktok-slider-element:build:development"
+              "buildTarget": "media-slider-element:build:development"
             }
           },
           "defaultConfiguration": "development"

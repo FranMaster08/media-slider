@@ -26,12 +26,25 @@
     <aside class="slide__actions">
         <div class="slide__avatar">
             <img [src]="data().avatar" alt="" />
-            <ttk-follow-button />
+            <media-follow-button
+                [initialFollowing]="initialFollowing()"
+                (followingChange)="followingChange.emit($event)"
+            />
         </div>
-        <ttk-action-button action="like" [initialCount]="data().counts.like ?? ''" />
-        <ttk-action-button action="comment" [initialCount]="data().counts.comment ?? ''" />
-        <ttk-action-button action="bookmark" [initialCount]="data().counts.bookmark ?? ''" />
-        <ttk-action-button action="share" (share)="share()" />
+        <media-action-button
+            action="like"
+            [initialCount]="data().counts.like ?? ''"
+            [initialActive]="initialLiked()"
+            (toggle)="actionToggle.emit($event)"
+        />
+        <media-action-button action="comment" [initialCount]="data().counts.comment ?? ''" />
+        <media-action-button
+            action="bookmark"
+            [initialCount]="data().counts.bookmark ?? ''"
+            [initialActive]="initialBookmarked()"
+            (toggle)="actionToggle.emit($event)"
+        />
+        <media-action-button action="share" (share)="share()" />
     </aside>
 </div>
 @if (data().type === 'video') {

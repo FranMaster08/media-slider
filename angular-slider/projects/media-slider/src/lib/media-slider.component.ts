@@ -17,23 +17,38 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { SlideComponent } from './components/slide.component';
 import { LikeBurstComponent } from './components/like-burst.component';
+import { ActionToggleEvent } from './components/action-button.component';
 import { SlideData } from './models/slide.model';
 
+export interface SlideActionEvent extends ActionToggleEvent {
+  readonly index: number;
+}
+
+export interface SlideFollowEvent {
+  readonly index: number;
+  readonly following: boolean;
+}
+
 @Component({
-  selector: 'ttk-slider',
+  selector: 'media-slider',
   standalone: true,
   imports: [SlideComponent, LikeBurstComponent],
-  templateUrl: './tiktok-slider.component.html',
-  styleUrl: './tiktok-slider.component.css',
+  templateUrl: './media-slider.component.html',
+  styleUrl: './media-slider.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TikTokSliderComponent implements AfterViewInit {
+export class MediaSliderComponent implements AfterViewInit {
   static readonly VISIBLE_THRESHOLD = 0.7;
 
   readonly slides = input.required<readonly SlideData[]>();
+  readonly initialFollowing = input<readonly boolean[]>([]);
+  readonly initialLiked = input<readonly boolean[]>([]);
+  readonly initialBookmarked = input<readonly boolean[]>([]);
 
   readonly doubleTap = output<void>();
   readonly mutedChange = output<boolean>();
+  readonly slideAction = output<SlideActionEvent>();
+  readonly slideFollow = output<SlideFollowEvent>();
 
   protected readonly muted = signal(true);
   protected readonly hasVideos = computed(() =>
@@ -58,7 +73,7 @@ export class TikTokSliderComponent implements AfterViewInit {
       (entries) => this.handleIntersect(entries),
       {
         root: this.viewportRef.nativeElement,
-        threshold: [0, TikTokSliderComponent.VISIBLE_THRESHOLD, 1],
+        threshold: [0, MediaSliderComponent.VISIBLE_THRESHOLD, 1],
       },
     );
 
@@ -85,7 +100,7 @@ export class TikTokSliderComponent implements AfterViewInit {
       if (!slide) continue;
       const isVisible =
         entry.isIntersecting &&
-        entry.intersectionRatio >= TikTokSliderComponent.VISIBLE_THRESHOLD;
+        entry.intersectionRatio >= MediaSliderComponent.VISIBLE_THRESHOLD;
       slide.setVisible(isVisible);
     }
   }
@@ -99,6 +114,14 @@ export class TikTokSliderComponent implements AfterViewInit {
   onSlideDoubleTap(): void {
     this.burst.play();
     this.doubleTap.emit();
+  }
+
+  onActionToggle(index: number, event: ActionToggleEvent): void {
+    this.slideAction.emit({ index, ...event });
+  }
+
+  onFollowingChange(index: number, following: boolean): void {
+    this.slideFollow.emit({ index, following });
   }
 
   toggleMute(event: MouseEvent): void {

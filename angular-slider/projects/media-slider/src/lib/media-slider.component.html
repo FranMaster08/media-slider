@@ -1,12 +1,21 @@
-<div #viewport class="ttk-slider__viewport">
-    @for (slide of slides(); track slide.media) {
-        <ttk-slide [data]="slide" [muted]="muted()" (doubleTap)="onSlideDoubleTap()" />
+<div #viewport class="media-slider__viewport">
+    @for (slide of slides(); track slide.media; let i = $index) {
+        <media-slide
+            [data]="slide"
+            [muted]="muted()"
+            [initialFollowing]="!!initialFollowing()[i]"
+            [initialLiked]="!!initialLiked()[i]"
+            [initialBookmarked]="!!initialBookmarked()[i]"
+            (doubleTap)="onSlideDoubleTap()"
+            (actionToggle)="onActionToggle(i, $event)"
+            (followingChange)="onFollowingChange(i, $event)"
+        />
     }
 </div>
 @if (hasVideos()) {
     <button
         type="button"
-        class="ttk-slider__mute"
+        class="media-slider__mute"
         [class.is-muted]="muted()"
         [attr.aria-label]="muted() ? 'Activar sonido' : 'Silenciar'"
         (click)="toggleMute($event)"
@@ -22,4 +31,4 @@
         }
     </button>
 }
-<ttk-like-burst />
+<media-like-burst />

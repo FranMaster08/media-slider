@@ -1,12 +1,12 @@
 import 'zone.js';
 import { createApplication } from '@angular/platform-browser';
 import { createCustomElement } from '@angular/elements';
-import { TikTokSliderComponent } from '../../tiktok-slider/src/public-api';
+import { MediaSliderComponent } from '../../media-slider/src/public-api';
 
 (async () => {
   const app = await createApplication();
-  const element = createCustomElement(TikTokSliderComponent, {
+  const element = createCustomElement(MediaSliderComponent, {
     injector: app.injector,
   });
-  customElements.define('tiktok-slider', element);
+  customElements.define('media-slider', element);
 })();

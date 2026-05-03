@@ -1,4 +1,4 @@
-import { TikTokSlider } from './js/TikTokSlider.js';
+import { MediaSlider } from './js/MediaSlider.js';
 import { SLIDES } from './js/slides.data.js';
 
-new TikTokSlider({ slides: SLIDES });
+new MediaSlider({ slides: SLIDES });

@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 
 @Component({
-  selector: 'ttk-like-burst',
+  selector: 'media-like-burst',
   standalone: true,
   templateUrl: './like-burst.component.html',
   styleUrl: './like-burst.component.css',

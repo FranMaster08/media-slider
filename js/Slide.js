@@ -62,7 +62,7 @@ export class Slide {
 
     share() {
         if (navigator.share) {
-            navigator.share({ title: 'TikTok Slider', url: location.href }).catch(() => {});
+            navigator.share({ title: 'Media Slider', url: location.href }).catch(() => {});
         }
     }
 

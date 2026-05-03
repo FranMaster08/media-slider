@@ -19,7 +19,7 @@
     "useDefineForClassFields": false,
     "lib": ["ES2022", "dom"],
     "paths": {
-      "tiktok-slider": ["projects/tiktok-slider/src/public-api.ts"]
+      "media-slider": ["projects/media-slider/src/public-api.ts"]
     }
   },
   "angularCompilerOptions": {

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>TikTok Slider — Web Component demo</title>
+    <title>Media Slider — Web Component demo</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         html, body { height: 100%; background: #1a1a1a; }
@@ -16,7 +16,7 @@
     </style>
 </head>
 <body>
-    <tiktok-slider id="feed"></tiktok-slider>
+    <media-slider id="feed"></media-slider>
 
     <script src="polyfills.js" type="module"></script>
     <script src="main.js" type="module"></script>
@@ -54,7 +54,7 @@
 
         const el = document.getElementById('feed');
 
-        customElements.whenDefined('tiktok-slider').then(() => {
+        customElements.whenDefined('media-slider').then(() => {
             el.slides = slides;
             el.addEventListener('doubleTap', () => console.log('liked'));
         });

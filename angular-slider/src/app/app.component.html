@@ -1,2 +1,13 @@
-<ttk-slider [slides]="slides()" />
+@if (slides().length > 0) {
+    <media-slider
+        [slides]="slides()"
+        [initialLiked]="initialLiked()"
+        [initialBookmarked]="initialBookmarked()"
+        [initialFollowing]="initialFollowing()"
+        (slideAction)="onSlideAction($event)"
+        (slideFollow)="onSlideFollow($event)"
+    />
+} @else {
+    <div class="app-loading">Cargando slides…</div>
+}
 <app-topbar />

@@ -11,12 +11,12 @@ import {
   output,
   signal,
 } from '@angular/core';
-import { ActionButtonComponent } from './action-button.component';
+import { ActionButtonComponent, ActionToggleEvent } from './action-button.component';
 import { FollowButtonComponent } from './follow-button.component';
 import { SlideData } from '../models/slide.model';
 
 @Component({
-  selector: 'ttk-slide',
+  selector: 'media-slide',
   standalone: true,
   imports: [ActionButtonComponent, FollowButtonComponent],
   templateUrl: './slide.component.html',
@@ -29,8 +29,13 @@ export class SlideComponent {
 
   readonly data = input.required<SlideData>();
   readonly muted = input<boolean>(true);
+  readonly initialFollowing = input<boolean>(false);
+  readonly initialLiked = input<boolean>(false);
+  readonly initialBookmarked = input<boolean>(false);
 
   readonly doubleTap = output<void>();
+  readonly actionToggle = output<ActionToggleEvent>();
+  readonly followingChange = output<boolean>();
 
   protected readonly visible = signal(false);
   protected readonly progress = signal(0);
@@ -107,7 +112,7 @@ export class SlideComponent {
 
   share(): void {
     if (typeof navigator !== 'undefined' && navigator.share) {
-      navigator.share({ title: 'TikTok Slider', url: location.href }).catch(() => {});
+      navigator.share({ title: 'Media Slider', url: location.href }).catch(() => {});
     }
   }
 

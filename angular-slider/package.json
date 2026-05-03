@@ -5,12 +5,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve angular-slider --open",
+    "db": "json-server --watch db.json --port 3000",
+    "dev": "concurrently -k -n db,ng -c magenta,cyan \"npm run db\" \"npm run start\"",
     "build": "ng build angular-slider",
-    "build:lib": "ng build tiktok-slider",
-    "build:element": "ng build tiktok-slider-element",
+    "build:lib": "ng build media-slider",
+    "build:element": "ng build media-slider-element",
     "build:all": "npm run build:lib && npm run build:element && npm run build",
-    "serve:element": "ng serve tiktok-slider-element --open",
-    "pack:lib": "npm run build:lib && cd dist/tiktok-slider && npm pack && cd ../.. && mv dist/tiktok-slider/*.tgz dist/",
+    "serve:element": "ng serve media-slider-element --open",
+    "pack:lib": "npm run build:lib && cd dist/media-slider && npm pack && cd ../.. && mv dist/media-slider/*.tgz dist/",
     "watch": "ng build --watch --configuration development"
   },
   "dependencies": {
@@ -30,6 +32,8 @@
     "@angular-devkit/build-angular": "^19.0.0",
     "@angular/cli": "^19.0.0",
     "@angular/compiler-cli": "^19.0.0",
+    "concurrently": "^9.2.1",
+    "json-server": "^0.17.4",
     "ng-packagr": "^19.2.2",
     "typescript": "~5.6.0"
   }

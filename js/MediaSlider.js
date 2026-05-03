@@ -2,7 +2,7 @@ import { Slide } from './Slide.js';
 import { LikeBurst } from './LikeBurst.js';
 import { SlideRenderer } from './SlideRenderer.js';
 
-export class TikTokSlider {
+export class MediaSlider {
     static VISIBLE_THRESHOLD = 0.7;
 
     constructor({
@@ -25,7 +25,7 @@ export class TikTokSlider {
 
         this.observer = new IntersectionObserver(this.handleIntersect.bind(this), {
             root: this.root,
-            threshold: [0, TikTokSlider.VISIBLE_THRESHOLD, 1],
+            threshold: [0, MediaSlider.VISIBLE_THRESHOLD, 1],
         });
 
         this.slides.forEach((s) => this.observer.observe(s.element));
@@ -41,7 +41,7 @@ export class TikTokSlider {
             const slide = this.slidesByElement.get(entry.target);
             if (!slide) return;
             const visible =
-                entry.isIntersecting && entry.intersectionRatio >= TikTokSlider.VISIBLE_THRESHOLD;
+                entry.isIntersecting && entry.intersectionRatio >= MediaSlider.VISIBLE_THRESHOLD;
             slide.setVisible(visible);
         });
     }

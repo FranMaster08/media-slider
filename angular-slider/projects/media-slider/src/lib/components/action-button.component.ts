@@ -17,8 +17,14 @@ const ICONS: Record<SlideAction, string> = {
   share: '↪',
 };
 
+export interface ActionToggleEvent {
+  readonly action: SlideAction;
+  readonly active: boolean;
+  readonly count: string;
+}
+
 @Component({
-  selector: 'ttk-action-button',
+  selector: 'media-action-button',
   standalone: true,
   templateUrl: './action-button.component.html',
   styleUrl: './action-button.component.css',
@@ -27,8 +33,10 @@ const ICONS: Record<SlideAction, string> = {
 export class ActionButtonComponent implements OnInit {
   readonly action = input.required<SlideAction>();
   readonly initialCount = input<string>('');
+  readonly initialActive = input<boolean>(false);
 
   readonly share = output<void>();
+  readonly toggle = output<ActionToggleEvent>();
 
   protected readonly active = signal(false);
   protected readonly count = signal('');
@@ -40,6 +48,7 @@ export class ActionButtonComponent implements OnInit {
 
   ngOnInit(): void {
     this.count.set(this.initialCount());
+    this.active.set(this.initialActive());
   }
 
   get isActive(): boolean {
@@ -47,7 +56,9 @@ export class ActionButtonComponent implements OnInit {
   }
 
   setActive(value: boolean): void {
+    if (this.active() === value) return;
     this.active.set(value);
+    this.emitToggle();
   }
 
   bumpCounter(delta: number): void {
@@ -66,11 +77,21 @@ export class ActionButtonComponent implements OnInit {
         if (this.action() === 'like') {
           this.bumpCounter(willActivate ? +1 : -1);
         }
+        this.emitToggle();
         break;
       }
       case 'share':
         this.share.emit();
         break;
     }
+  }
+
+  private emitToggle(): void {
+    if (this.action() === 'share' || this.action() === 'comment') return;
+    this.toggle.emit({
+      action: this.action(),
+      active: this.active(),
+      count: this.count(),
+    });
   }
 }

@@ -1,58 +1,84 @@
-# TikTok Slider — Angular
+# Media Slider — Angular
 
-Versión Angular 19 (standalone components + signals) del slider tipo TikTok original en `../`.
+Versión Angular 19 (standalone components + signals) del slider vertical de medios.
+Los datos se leen y se escriben contra un **servidor REST fake** (`json-server`), que
+emula persistencia real usando `db.json` como base de datos en disco.
 
 ## Estructura
 
 ```
-src/
-├── index.html
-├── main.ts                      # bootstrap standalone
-├── styles.css                   # estilos globales (reset + body)
-└── app/
-    ├── app.component.ts         # raíz: monta slider + topbar + like-burst
-    ├── models/
-    │   └── slide.model.ts       # SlideData, SlideAction
-    ├── data/
-    │   └── slides.data.ts       # SLIDES (mock)
-    ├── utils/
-    │   └── count-formatter.ts   # parse / format / bump (1.2K -> 1.3K)
-    └── components/
-        ├── tiktok-slider/       # contenedor con IntersectionObserver + teclado
-        ├── slide/               # un slide (tap, doble-tap, scroll prev/next)
-        ├── action-button/       # like / comment / bookmark / share
-        ├── follow-button/       # botón "+" del avatar
-        ├── like-burst/          # corazón animado al doble-tap
-        └── topbar/              # "Siguiendo / Para ti"
+angular-slider/
+├── db.json                          # "DB" fake que sirve json-server en :3000
+├── src/
+│   ├── main.ts                      # bootstrap + provideHttpClient
+│   └── app/
+│       ├── app.component.ts         # consume SlidesService + cablea outputs
+│       ├── data/
+│       │   ├── persisted-slide.model.ts  # SlideData + id + estado "myX"
+│       │   └── slides.service.ts         # GET /slides, PATCH /slides/:id
+│       └── components/
+│           └── topbar/              # "Siguiendo / Para ti"
+└── projects/
+    └── media-slider/                # librería publicable (Angular Package)
+        └── src/lib/
+            ├── media-slider.component.{ts,html,css}   # orquestador
+            └── components/
+                ├── slide.component.{ts,html,css}
+                ├── action-button.component.{ts,html,css}
+                ├── follow-button.component.{ts,html,css}
+                └── like-burst.component.{ts,html,css}
 ```
 
-## Mapeo respecto al proyecto original
+## Arquitectura de persistencia
 
-| Original (vanilla JS)         | Angular                               |
-| ----------------------------- | ------------------------------------- |
-| `TikTokSlider.js`             | `TikTokSliderComponent`               |
-| `Slide.js`                    | `SlideComponent`                      |
-| `SlideRenderer.js` + template | `SlideComponent` template (`@for`)    |
-| `ActionButton.js`             | `ActionButtonComponent`               |
-| `FollowButton.js`             | `FollowButtonComponent`               |
-| `LikeBurst.js`                | `LikeBurstComponent`                  |
-| `CountFormatter.js`           | `utils/count-formatter.ts`            |
-| `slides.data.js`              | `data/slides.data.ts`                 |
-| `index.html` topbar           | `TopbarComponent`                     |
+```
+┌──────────────┐   GET /slides    ┌────────────┐   read    ┌─────────┐
+│ AppComponent │ ───────────────► │ json-server │ ───────► │ db.json │
+│              │ ◄─────────────── │   :3000     │ ◄─────── │         │
+│              │   PATCH /:id     └────────────┘   write   └─────────┘
+│              │
+│     │ slides input
+│     ▼
+│  <media-slider>
+│     │ slideAction / slideFollow output
+└─────┘
+```
+
+La librería `media-slider` sigue siendo **pura**: no sabe nada de HTTP. Recibe
+`SlideData[]` por input y emite outputs cuando el usuario interactúa. El
+`AppComponent` es el único punto que habla con `SlidesService`, que a su vez
+hace las peticiones contra `json-server`.
 
 ## Ejecutar
 
 ```bash
 npm install
-npm start
+npm run dev      # levanta json-server (:3000) + ng serve (:4200) en paralelo
 ```
 
-Esto sirve la app en `http://localhost:4200/`.
+O por separado en dos terminales:
+
+```bash
+npm run db       # json-server --watch db.json --port 3000
+npm start        # ng serve angular-slider --open
+```
+
+Cualquier like, bookmark o follow que hagas se escribe en `db.json` y
+sobrevive a recargas y reinicios.
+
+## Endpoints disponibles (json-server)
+
+- `GET http://localhost:3000/slides` → array completo
+- `GET http://localhost:3000/slides/:id` → slide concreto
+- `PATCH http://localhost:3000/slides/:id` → actualiza campos
+- `POST http://localhost:3000/slides` → añade un slide nuevo
 
 ## Build de producción
 
 ```bash
-npm run build
+npm run build       # app consumidora
+npm run build:lib   # sólo la librería media-slider
+npm run build:all   # librería + custom element + app
 ```
 
 ## Atajos de teclado
@@ -61,4 +87,5 @@ npm run build
 - `↑` / `PageUp` — slide anterior
 - `Espacio` — play/pause (sólo videos)
 - `L` — like
-- Doble-tap / doble-click — like + animación
+- `M` — silenciar/activar audio global
+- Doble-tap / doble-click — like + animación corazón

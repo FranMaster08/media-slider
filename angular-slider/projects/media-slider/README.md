@@ -1,6 +1,6 @@
-# tiktok-slider
+# media-slider
 
-Slider vertical estilo TikTok para **Angular 19+** y como **Web Component** standalone.
+Slider vertical de medios para **Angular 19+** y como **Web Component** standalone.
 
 - Soporta **imágenes y vídeos** (campo `type: 'image' | 'video'`).
 - Scroll snap vertical, un slide por viewport.
@@ -18,20 +18,20 @@ Slider vertical estilo TikTok para **Angular 19+** y como **Web Component** stan
 ### Instalación
 
 ```bash
-npm install tiktok-slider
+npm install media-slider
 ```
 
 ### En tu componente
 
 ```ts
 import { Component, signal } from '@angular/core';
-import { TikTokSliderComponent, SlideData } from 'tiktok-slider';
+import { MediaSliderComponent, SlideData } from 'media-slider';
 
 @Component({
   selector: 'app-feed',
   standalone: true,
-  imports: [TikTokSliderComponent],
-  template: `<ttk-slider [slides]="slides()" (doubleTap)="onLike()" />`,
+  imports: [MediaSliderComponent],
+  template: `<media-slider [slides]="slides()" (doubleTap)="onLike()" />`,
 })
 export class FeedComponent {
   readonly slides = signal<SlideData[]>([
@@ -64,8 +64,8 @@ export class FeedComponent {
 ### API
 
 ```ts
-@Component({ selector: 'ttk-slider', standalone: true })
-class TikTokSliderComponent {
+@Component({ selector: 'media-slider', standalone: true })
+class MediaSliderComponent {
   slides = input.required<readonly SlideData[]>();
   doubleTap = output<void>();
   mutedChange = output<boolean>(); // emite al cambiar mute global
@@ -96,9 +96,9 @@ Carga el bundle generado por `npm run build:element` (un único `.js` con todas 
 <!doctype html>
 <html>
   <body>
-    <tiktok-slider id="feed"></tiktok-slider>
+    <media-slider id="feed"></media-slider>
 
-    <script src="./tiktok-slider-element.js"></script>
+    <script src="./media-slider-element.js"></script>
     <script>
       document.getElementById('feed').slides = [
         {

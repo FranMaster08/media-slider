@@ -10,7 +10,7 @@
     -webkit-tap-highlight-color: transparent;
 }
 
-.ttk-slider__viewport {
+.media-slider__viewport {
     position: absolute;
     inset: 0;
     overflow-y: scroll;
@@ -21,11 +21,11 @@
     scrollbar-width: none;
 }
 
-.ttk-slider__viewport::-webkit-scrollbar {
+.media-slider__viewport::-webkit-scrollbar {
     display: none;
 }
 
-.ttk-slider__mute {
+.media-slider__mute {
     position: absolute;
     top: calc(14px + env(safe-area-inset-top));
     right: 14px;
@@ -46,15 +46,15 @@
     padding: 0;
 }
 
-.ttk-slider__mute:hover {
+.media-slider__mute:hover {
     background: rgba(0, 0, 0, 0.6);
 }
 
-.ttk-slider__mute:active {
+.media-slider__mute:active {
     transform: scale(0.92);
 }
 
-.ttk-slider__mute.is-muted {
+.media-slider__mute.is-muted {
     color: rgba(255, 255, 255, 0.85);
 }
 
