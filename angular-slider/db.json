@@ -10,12 +10,13 @@
       "music": "sonido original - mountain_lover",
       "counts": {
         "like": "1.2K",
-        "comment": "340",
-        "bookmark": "89"
+        "comment": "341",
+        "bookmark": "89",
+        "share": "45"
       },
-      "likedByMe": false,
-      "bookmarkedByMe": false,
-      "following": false
+      "likedByMe": true,
+      "bookmarkedByMe": true,
+      "following": true
     },
     {
       "id": "2",
@@ -29,9 +30,10 @@
       "counts": {
         "like": "12.8K",
         "comment": "1.5K",
-        "bookmark": "730"
+        "bookmark": "730",
+        "share": "321"
       },
-      "likedByMe": false,
+      "likedByMe": true,
       "bookmarkedByMe": false,
       "following": false
     },
@@ -46,7 +48,8 @@
       "counts": {
         "like": "8.5K",
         "comment": "910",
-        "bookmark": "421"
+        "bookmark": "421",
+        "share": "210"
       },
       "likedByMe": false,
       "bookmarkedByMe": false,
@@ -63,7 +66,8 @@
       "counts": {
         "like": "20K",
         "comment": "1.1K",
-        "bookmark": "2.3K"
+        "bookmark": "2.3K",
+        "share": "1.8K"
       },
       "likedByMe": false,
       "bookmarkedByMe": false,
@@ -80,7 +84,8 @@
       "counts": {
         "like": "45K",
         "comment": "3.2K",
-        "bookmark": "5.1K"
+        "bookmark": "5.1K",
+        "share": "4.3K"
       },
       "likedByMe": false,
       "bookmarkedByMe": false,

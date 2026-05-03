@@ -38,24 +38,39 @@ export class SlidesService {
     const slide = this._slides()[index];
     if (!slide) return;
 
-    const patch =
-      action === 'like'
-        ? {
-            likedByMe: active,
-            counts: { ...slide.counts, like: count },
-          }
-        : action === 'bookmark'
-          ? {
-              bookmarkedByMe: active,
-              counts: { ...slide.counts, bookmark: count },
-            }
-          : null;
+    const patch = this.buildActionPatch(slide, action, active, count);
     if (!patch) return;
 
     this.patchLocal(index, patch);
     this.http.patch(`${API_URL}/${slide.id}`, patch).subscribe({
       error: (err) => console.error('PATCH slide falló', err),
     });
+  }
+
+  private buildActionPatch(
+    slide: PersistedSlide,
+    action: SlideAction,
+    active: boolean,
+    count: string,
+  ): Partial<PersistedSlide> | null {
+    switch (action) {
+      case 'like':
+        return {
+          likedByMe: active,
+          counts: { ...slide.counts, like: count },
+        };
+      case 'bookmark':
+        return {
+          bookmarkedByMe: active,
+          counts: { ...slide.counts, bookmark: count },
+        };
+      case 'comment':
+        return { counts: { ...slide.counts, comment: count } };
+      case 'share':
+        return { counts: { ...slide.counts, share: count } };
+      default:
+        return null;
+    }
   }
 
   updateFollowing(index: number, following: boolean): void {

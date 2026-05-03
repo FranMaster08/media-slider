@@ -62,7 +62,6 @@ export class ActionButtonComponent implements OnInit {
   }
 
   bumpCounter(delta: number): void {
-    if (this.action() === 'share') return;
     this.count.update((current) => CountFormatter.bump(current, delta));
   }
 
@@ -80,14 +79,19 @@ export class ActionButtonComponent implements OnInit {
         this.emitToggle();
         break;
       }
+      case 'comment':
+        this.bumpCounter(+1);
+        this.emitToggle();
+        break;
       case 'share':
+        this.bumpCounter(+1);
+        this.emitToggle();
         this.share.emit();
         break;
     }
   }
 
   private emitToggle(): void {
-    if (this.action() === 'share' || this.action() === 'comment') return;
     this.toggle.emit({
       action: this.action(),
       active: this.active(),

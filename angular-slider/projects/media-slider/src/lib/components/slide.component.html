@@ -37,14 +37,23 @@
             [initialActive]="initialLiked()"
             (toggle)="actionToggle.emit($event)"
         />
-        <media-action-button action="comment" [initialCount]="data().counts.comment ?? ''" />
+        <media-action-button
+            action="comment"
+            [initialCount]="data().counts.comment ?? ''"
+            (toggle)="actionToggle.emit($event)"
+        />
         <media-action-button
             action="bookmark"
             [initialCount]="data().counts.bookmark ?? ''"
             [initialActive]="initialBookmarked()"
             (toggle)="actionToggle.emit($event)"
         />
-        <media-action-button action="share" (share)="share()" />
+        <media-action-button
+            action="share"
+            [initialCount]="data().counts.share ?? ''"
+            (toggle)="actionToggle.emit($event)"
+            (share)="share()"
+        />
     </aside>
 </div>
 @if (data().type === 'video') {
